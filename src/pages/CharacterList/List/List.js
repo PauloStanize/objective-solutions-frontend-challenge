@@ -1,29 +1,40 @@
 import React from 'react'
 import styled from 'styled-components'
+import LoadingDots from './../../../components/LoadingDots'
 
-const List = ({ characters }) => (
-  <>
-    <GridRow>
-      <Header>Personagem</Header>
-      <Header>Descrição</Header>
-    </GridRow>
+const List = ({ characters, fetch, error, isPending }) => {
+  console.log('characters', characters)
+  console.log('isPending', isPending)
 
-    {characters.map((character, key) => (
-      <ListRow key={key}>
-        <Character>
-          <CharacterAvatar src={character.attributes.image.original} alt="Avatar" />
-          <CharacterName>{character.attributes.name}</CharacterName>
-        </Character>
+  return (
+    <>
+      <GridRow>
+        <Header>Personagem</Header>
+        <Header>Descrição</Header>
+      </GridRow>
 
-        <Description>
-          <DescriptionText>
-            {character.attributes.description}
-          </DescriptionText>
-        </Description>
-      </ListRow>
-    ))}
-  </>
-)
+      {isPending ? (
+        <LoadingDots />
+      ) : (
+          characters.map((character, key) => (
+            <ListRow key={key}>
+              <Character>
+                <CharacterAvatar src={character.attributes.image.original} alt="Avatar" />
+                <CharacterName>{character.attributes.name}</CharacterName>
+              </Character>
+
+              <Description>
+                <DescriptionText>
+                  {character.attributes.description}
+                </DescriptionText>
+              </Description>
+            </ListRow>
+          ))
+        )
+      }
+    </>
+  )
+}
 
 const GridRow = styled.div`
   display: grid;
@@ -33,6 +44,7 @@ const GridRow = styled.div`
 
 const ListRow = styled(GridRow)`
   border-bottom: 2px solid #d4cece;
+  min-height: 115px;
   &:hover {
     background: #ece5e5;
     cursor: pointer;

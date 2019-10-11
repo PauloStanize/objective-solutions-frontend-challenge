@@ -35,6 +35,8 @@ export const fetchData = query => dispatch => {
   //       dispatch(fetchError(error))
   //   })
 
-  dispatch(fetchSuccess(Mock.data))
-  return Mock.data
+  setTimeout(() => {
+    dispatch(fetchSuccess(Mock.data))
+    return Mock.data
+  }, 1000);
 }
