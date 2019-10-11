@@ -3,14 +3,14 @@ import styled from 'styled-components'
 
 const Header = ({ className }) => (
   <div className={className}>
-    <strong>BUSCA MARVEL</strong>
+    <strong>BUSCA KITSU</strong>
     <div>TESTE FRONT-END</div>
     <CandidateName>Paulo Stanize</CandidateName>
   </div>
 )
 
 const CandidateName = styled.div`
-  margin-left: auto
+  margin-left: auto !important
 `
 
 const StyledHeader = styled(Header)`
@@ -31,6 +31,10 @@ const StyledHeader = styled(Header)`
     left: 43px;
     height: 4px;
     width: 54px;
+  }
+
+  & div {
+    margin-left: 5px;
   }
 `
 

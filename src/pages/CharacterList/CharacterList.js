@@ -3,11 +3,10 @@ import Header from './Header'
 import List from './List'
 import Pagination from './Pagination'
 
-export default ({ fetch }) => {
+export default ({ fetch, pagination }) => {
   useEffect(() => {
     fetch()
-  }, [fetch]);
-
+  }, [fetch, pagination.limit, pagination.offset])
   
   return (
     <>

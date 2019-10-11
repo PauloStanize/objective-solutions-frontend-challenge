@@ -2,10 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import LoadingDots from './../../../components/LoadingDots'
 
-const List = ({ characters, fetch, error, isPending }) => {
-  console.log('characters', characters)
-  console.log('isPending', isPending)
-
+const List = ({ characters, isPending }) => {
   return (
     <>
       <GridRow>

@@ -1,20 +1,75 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-const Pagination = () => (
-  <>
-    <Container>
-      <PreviousButton />
-      <PageButton>1</PageButton>
-      <PageButton>2</PageButton>
-      <PageButton>3</PageButton>
-      <PageButton>4</PageButton>
-      <PageButton>5</PageButton>
-      <PageButton>6</PageButton>
-      <NextButton />
-    </Container>
-  </>
-)
+const Pagination = ({ total, perPage = 10, pagesCount = 5, currentPagination, setPagination }) => {
+  const [currentPage, setCurrentPage] = useState(1)
+
+  useEffect(() => {
+    const lastPage = Math.floor(total/perPage) + 1
+    const newPage = Math.floor(currentPagination.offset/currentPagination.limit) + 1 
+
+    setCurrentPage(Math.min(lastPage, newPage))
+  }, [currentPagination.offset, currentPagination.limit])
+
+  useEffect(() => {
+    setPagination({ limit: perPage })
+  }, [perPage])
+
+  const handlePageClick = (pageNumber) => {
+    setPagination({
+      offset: currentPagination.limit * (pageNumber - 1),
+    })
+  }
+
+  const handlePreviousClick = () => {
+    const previousOffset = currentPagination.offset - currentPagination.limit
+
+    setPagination({
+      offset: previousOffset >= 0 ? previousOffset : 0,
+    })    
+  }
+
+  const handleNextClick = () => {
+    setPagination({
+      offset: Math.min(currentPagination.offset + currentPagination.limit, total),
+    })
+  }
+
+  const [pages, setPages] = useState({
+    1: { number: 1, isActive: true },
+  })
+
+  useEffect(() => {
+    const numberOfPages = Math.ceil(total / perPage) || 1
+    const firstShowingPage = Math.max(1, currentPage - 2)
+    const lastShowingPage = Math.min(numberOfPages, currentPage + 2)
+
+    const pagesToBeRendered = {}
+
+    for(let i = firstShowingPage; i <= lastShowingPage; i++) {
+      pagesToBeRendered[i] = {
+        number: i,
+        isActive: currentPage === i
+      }
+    }
+
+    setPages(pagesToBeRendered)
+  }, [currentPage, total])
+
+  return (
+    <>
+      <Container>
+        <PreviousButton onClick={handlePreviousClick} />
+        {
+          Object.entries(pages).map(([key, { isActive, number }]) => (
+            <PageButton key={key} isActive={isActive} onClick={() => handlePageClick(number)} >{number}</PageButton>
+          ))
+        }
+        <NextButton onClick={handleNextClick} />
+      </Container>
+    </>
+  )
+}
 
 const Container = styled.div`
   width: 100%;
@@ -33,6 +88,8 @@ const PageButton = styled.div`
   border-radius: 32px;
   font-size: 21px;
   color: #D42026;
+  color: ${props => props.isActive ? 'white' : '#D42026'};
+  background-color: ${props => props.isActive ? '#D42026' : 'white'};
   border: 1px solid #D20A0A;
   margin: 0 10px;
 `

@@ -1,5 +1,10 @@
-import { FETCH_SUCCESS, FETCH_PENDING, FETCH_ERROR } from "../constants/actionTypes"
+import { FETCH_SUCCESS, FETCH_PENDING, FETCH_ERROR, SET_QUERY } from "../constants/actionTypes"
 import Mock from '../mock'
+
+export const setQuery = query => ({
+  type: SET_QUERY,
+  query,
+})
 
 export const fetchPending = value => ({
   type: FETCH_PENDING,
@@ -15,10 +20,11 @@ export const fetchError = error => ({
   error,
 })
 
-export const fetchData = query => dispatch => {
+export const fetchData = query => (dispatch, getState) => {
   dispatch(fetchPending())
 
   console.log('fetching query', query)
+  console.log('getState', getState())
 
   // fetch('https://kitsu.io/api/edge/characters')
   //   .then(res => res.json())
@@ -36,7 +42,7 @@ export const fetchData = query => dispatch => {
   //   })
 
   setTimeout(() => {
-    dispatch(fetchSuccess(Mock.data))
-    return Mock.data
+    dispatch(fetchSuccess({ data: Mock.data, total: Mock.meta.count}))
+    return { data: Mock.data, total: Mock.meta.count}
   }, 1000);
 }

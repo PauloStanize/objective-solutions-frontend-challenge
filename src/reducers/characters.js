@@ -3,6 +3,7 @@ import { FETCH_SUCCESS, FETCH_PENDING, FETCH_ERROR } from "../constants/actionTy
 const initialState = {
   pending: false,
   data: [],
+  total: 0,
   error: null,
 }
 
@@ -17,7 +18,8 @@ export default (state = initialState, action) => {
       return {
           ...state,
           pending: false,
-          data: action.payload
+          data: action.payload.data,
+          total: action.payload.total,
       }
     case FETCH_ERROR:
       return {
@@ -31,5 +33,6 @@ export default (state = initialState, action) => {
 }
 
 export const getData = state => state.characters.data
+export const getTotal = state => state.characters.total
 export const getPending = state => state.characters.pending
 export const getError = state => state.characters.error
