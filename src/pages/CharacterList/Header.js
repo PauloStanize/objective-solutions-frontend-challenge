@@ -22,6 +22,7 @@ const StyledHeader = styled(Header)`
   line-height: 32px;
   font-family: "Roboto", Times, serif;
   font-weight: 100;
+  margin-bottom: 34px;
 
   &:after {
     content: "";

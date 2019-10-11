@@ -1,3 +1,4 @@
+import Qs from 'qs'
 import { FETCH_SUCCESS, FETCH_PENDING, FETCH_ERROR, SET_QUERY } from "../constants/actionTypes"
 import Mock from '../mock'
 
@@ -23,10 +24,10 @@ export const fetchError = error => ({
 export const fetchData = query => (dispatch, getState) => {
   dispatch(fetchPending())
 
-  console.log('fetching query', query)
-  console.log('getState', getState())
+  const { pagination } = getState()
+  const queryString = Qs.stringify(query || { page: pagination })
 
-  // fetch('https://kitsu.io/api/edge/characters')
+  // fetch(`https://kitsu.io/api/edge/characters?${queryString}`)
   //   .then(res => res.json())
   //   .then(res => {
   //       if(res.error) {
@@ -34,8 +35,8 @@ export const fetchData = query => (dispatch, getState) => {
   //       }
 
   //       console.log('res', res)
-  //       dispatch(fetchSuccess(res.data))
-  //       return res.data
+  //       dispatch(fetchSuccess({ data: res.data, total: res.meta.count}))
+  //       return { data: res.data, total: res.meta.count}
   //   })
   //   .catch(error => {
   //       dispatch(fetchError(error))
