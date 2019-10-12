@@ -6,12 +6,31 @@ import {
 
 const Header = ({ className, characterName = '' }) => (
   <div className={className}>
-    <strong>{characterName}</strong>
+    <StrongTitle>{characterName}</StrongTitle>
     <StyledLink to={`/`} >
       Voltar
     </StyledLink>
   </div>
 )
+
+const StrongTitle = styled.strong`
+  margin-right: 5px;
+  display: inline-block;
+
+  &:after {
+    content:'';
+    display:block;
+    background: ${props => props.theme.primary};
+    width: 54px;
+    border-bottom:solid ;
+  }
+
+  @media only screen and (min-width: 768px) {
+    &:after {
+      height: 4px;
+    }
+  }
+`
 
 const StyledLink = styled(Link)`
   margin-left: auto !important;
@@ -30,16 +49,6 @@ const StyledHeader = styled(Header)`
   font-weight: 100;
   margin-bottom: 34px;
   text-transform: uppercase;
-
-  &:after {
-    content: "";
-    background: ${props => props.theme.primary};
-    position: absolute;
-    top: 50px;
-    left: 43px;
-    height: 4px;
-    width: 54px;
-  }
 
   & div {
     margin-left: 5px;
