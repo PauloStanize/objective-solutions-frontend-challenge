@@ -17,7 +17,7 @@ export default ({ fetch, pagination, filters }) => {
       <Header />
       <SearchInput />
       <List />
-      <Pagination sideButtonCount={windowWidth > 768 ? 2: 1}></Pagination>
+      <Pagination sideButtonCount={windowWidth >= 768 ? 2: 1}></Pagination>
     </>
   )
 }

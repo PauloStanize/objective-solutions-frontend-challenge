@@ -19,6 +19,21 @@ const CandidateName = styled.div`
 
 const StrongTitle = styled.strong`
   margin-right: 5px;
+  display: inline-block;
+
+  &:after {
+    content:'';
+    display:block;
+    background: ${props => props.theme.primary};
+    width: 54px;
+    border-bottom:solid ;
+  }
+
+  @media only screen and (min-width: 768px) {
+    &:after {
+      height: 4px;
+    }
+  }
 `
 
 const StyledHeader = styled(Header)`
@@ -35,24 +50,10 @@ const StyledHeader = styled(Header)`
   margin-bottom: 12px;
   justify-content: center;
 
-  &:after {
-    content: "";
-    background: ${props => props.theme.primary};
-    position: absolute;
-    top: 40px;
-    left: 43px;
-    height: 4px;
-    width: 54px;
-  }
-
   @media only screen and (min-width: 768px) {
     justify-content: left;
     font-size: 27px;
     margin-bottom: 34px;
-
-    &:after {
-      top: 50px;
-    }
   }
 `
 
