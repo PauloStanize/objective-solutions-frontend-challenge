@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 const Pagination = ({ total, perPage = 10, pagesCount = 5, currentPagination, setPagination }) => {
   const [currentPage, setCurrentPage] = useState(1)
+  const lastPage = Math.floor(total/perPage) + 1
 
   useEffect(() => {
-    const lastPage = Math.floor(total/perPage) + 1
     const newPage = Math.floor(currentPagination.offset/currentPagination.limit) + 1 
 
     setCurrentPage(Math.min(lastPage, newPage))
@@ -59,13 +59,13 @@ const Pagination = ({ total, perPage = 10, pagesCount = 5, currentPagination, se
   return (
     <>
       <Container>
-        <PreviousButton onClick={handlePreviousClick} />
+        <PreviousButton disabled={currentPage <= 1} onClick={handlePreviousClick} />
         {
           Object.entries(pages).map(([key, { isActive, number }]) => (
             <PageButton key={key} isActive={isActive} onClick={() => handlePageClick(number)} >{number}</PageButton>
           ))
         }
-        <NextButton onClick={handleNextClick} />
+        <NextButton disabled={currentPage >= lastPage} onClick={handleNextClick} />
       </Container>
     </>
   )
@@ -81,36 +81,48 @@ const Container = styled.div`
   margin-bottom: 16px;
 `
 
-const PageButton = styled.div`
+const ResetedStyleButton = styled.button`
+  margin: 0;
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  outline: none;
+  background-color: inherit;
+  border: none;
+  text-align: center;
+  padding: 0;
+`
+
+const PageButton = styled(ResetedStyleButton)`
   cursor: pointer;
   width: 32px;
   height: 32px;
   border-radius: 32px;
   font-size: 21px;
-  color: #D42026;
+  line-height: 1.1em;
   color: ${props => props.isActive ? 'white' : '#D42026'};
   background-color: ${props => props.isActive ? '#D42026' : 'white'};
   border: 1px solid #D20A0A;
   margin: 0 10px;
 `
 
-const PreviousButton = styled.div`
+const PreviousButton = styled(ResetedStyleButton)`
   cursor: pointer;
   width: 0;
   height: 0;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-right: 12px solid #D20A0A;
+  border-right: 12px solid ${props => props.disabled ? '#d20a0a59' : '#D42026'};
   margin-right: 2px;
 `
 
-const NextButton = styled.div`
+const NextButton = styled(ResetedStyleButton)`
   cursor: pointer;
   width: 0;
   height: 0;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-left: 12px solid #D20A0A;
+  border-left: 12px solid ${props => props.disabled ? '#d20a0a59' : '#D42026'};
   margin-left: 2px;
 `
 
