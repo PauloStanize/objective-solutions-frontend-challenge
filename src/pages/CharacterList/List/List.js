@@ -16,7 +16,7 @@ const List = ({ characters, isPending }) => {
           characters.map((character, key) => (
             <ListRow key={key}>
               <Character>
-                <CharacterAvatar src={character.attributes.image.original} alt="Avatar" />
+                <CharacterAvatar src={(character.attributes.image || {}).original} alt="Avatar" />
                 <CharacterName>{character.attributes.name}</CharacterName>
               </Character>
 

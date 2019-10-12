@@ -24,8 +24,15 @@ export const fetchError = error => ({
 export const fetchData = query => (dispatch, getState) => {
   dispatch(fetchPending())
 
-  const { pagination } = getState()
-  const queryString = Qs.stringify(query || { page: pagination })
+  const { pagination, filters } = getState()
+  const queryString = Qs.stringify(query || { 
+    page: pagination, 
+    filter: {
+      ...filters.name && { name: filters.name }
+    }    
+  })
+
+  console.log('queryString', queryString)
 
   // fetch(`https://kitsu.io/api/edge/characters?${queryString}`)
   //   .then(res => res.json())
@@ -34,7 +41,6 @@ export const fetchData = query => (dispatch, getState) => {
   //           throw(res.error)
   //       }
 
-  //       console.log('res', res)
   //       dispatch(fetchSuccess({ data: res.data, total: res.meta.count}))
   //       return { data: res.data, total: res.meta.count}
   //   })
