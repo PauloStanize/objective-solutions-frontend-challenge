@@ -45,6 +45,7 @@ export default ({ fetch, isPending, character }) => {
 
 const CharacterDetails = styled.div`
   margin-bottom: 30px;
+  padding: 0 42px 0 42px;
 `
 
 const GridRow = styled.div`
