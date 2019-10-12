@@ -32,9 +32,4 @@ export const fetchData = query => (dispatch, getState) => {
     .catch(error => {
         dispatch(fetchError(error))
     })
-
-  // setTimeout(() => {
-  //   dispatch(fetchSuccess({ data: Mock.data[0] }))
-  //   return { data: Mock.data[0] }
-  // }, 1000);
 }

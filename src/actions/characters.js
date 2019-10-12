@@ -32,24 +32,17 @@ export const fetchData = query => (dispatch, getState) => {
     }    
   })
 
-  console.log('queryString', queryString)
+  fetch(`https://kitsu.io/api/edge/characters?${queryString}`)
+    .then(res => res.json())
+    .then(res => {
+        if(res.error) {
+            throw(res.error)
+        }
 
-  // fetch(`https://kitsu.io/api/edge/characters?${queryString}`)
-  //   .then(res => res.json())
-  //   .then(res => {
-  //       if(res.error) {
-  //           throw(res.error)
-  //       }
-
-  //       dispatch(fetchSuccess({ data: res.data, total: res.meta.count}))
-  //       return { data: res.data, total: res.meta.count}
-  //   })
-  //   .catch(error => {
-  //       dispatch(fetchError(error))
-  //   })
-
-  setTimeout(() => {
-    dispatch(fetchSuccess({ data: Mock.data, total: Mock.meta.count}))
-    return { data: Mock.data, total: Mock.meta.count}
-  }, 1000);
+        dispatch(fetchSuccess({ data: res.data, total: res.meta.count}))
+        return { data: res.data, total: res.meta.count}
+    })
+    .catch(error => {
+        dispatch(fetchError(error))
+    })
 }
