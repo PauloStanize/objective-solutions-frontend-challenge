@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-const Pagination = ({ total, perPage = 10, pagesCount = 5, currentPagination, setPagination }) => {
+const Pagination = ({ total, perPage = 10, sideButtonCount = 1, currentPagination, setPagination }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const lastPage = Math.floor(total/perPage) + 1
 
@@ -41,8 +41,8 @@ const Pagination = ({ total, perPage = 10, pagesCount = 5, currentPagination, se
 
   useEffect(() => {
     const numberOfPages = Math.ceil(total / perPage) || 1
-    const firstShowingPage = Math.max(1, currentPage - 2)
-    const lastShowingPage = Math.min(numberOfPages, currentPage + 2)
+    const firstShowingPage = Math.max(1, currentPage - sideButtonCount)
+    const lastShowingPage = Math.min(numberOfPages, currentPage + sideButtonCount)
 
     const pagesToBeRendered = {}
 
@@ -54,7 +54,7 @@ const Pagination = ({ total, perPage = 10, pagesCount = 5, currentPagination, se
     }
 
     setPages(pagesToBeRendered)
-  }, [currentPage, total])
+  }, [currentPage, total, sideButtonCount])
 
   return (
     <>
@@ -77,8 +77,13 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 16px;
+  margin-top: 18px;
+  margin-bottom: 24px;
+
+  @media only screen and (min-width: 768px) {
+    margin-top: 30px;
+    margin-bottom: 16px;
+  }
 `
 
 const ResetedStyleButton = styled.button`
@@ -103,7 +108,12 @@ const PageButton = styled(ResetedStyleButton)`
   color: ${props => props.isActive ? 'white' : props.theme.primary};
   background-color: ${props => props.isActive ? props.theme.primary : 'white'};
   border: 1px solid ${props => props.theme.primary};
+
   margin: 0 10px;
+
+  @media only screen and (min-width: 768px) {
+     margin: 0 10px;
+  } 
 `
 
 const PreviousButton = styled(ResetedStyleButton)`
@@ -113,7 +123,13 @@ const PreviousButton = styled(ResetedStyleButton)`
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
   border-right: 12px solid ${props => props.disabled ? props.theme.buttonDisabled : props.theme.buttonEnabled};
-  margin-right: 2px;
+  margin-left: 30px;
+  margin-right: 40px;
+
+  @media only screen and (min-width: 768px) {
+    margin-right: 2px;
+    margin-left: 0;
+  }
 `
 
 const NextButton = styled(ResetedStyleButton)`
@@ -123,7 +139,13 @@ const NextButton = styled(ResetedStyleButton)`
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
   border-left: 12px solid ${props => props.disabled ? props.theme.buttonDisabled : props.theme.buttonEnabled};
-  margin-left: 2px;
+  margin-right: 30px;
+  margin-left: 40px;
+
+  @media only screen and (min-width: 768px) {
+    margin-left: 2px;
+    margin-right: 0;
+  }
 `
 
 export default Pagination
