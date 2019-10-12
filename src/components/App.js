@@ -27,8 +27,13 @@ const App = () => (
 )
 
 const Container = styled.div`
-  padding: 20px 42px 0 42px;
-  min-height: calc(100vh - 32px)
+  padding-top: 12px;
+  min-height: calc(100vh - 24px);
+  
+  @media only screen and (min-width: 768px) {
+    padding: 20px 42px 0 42px;
+    min-height: calc(100vh - 32px);
+  }
 `
 
 const Footer = styled.div`

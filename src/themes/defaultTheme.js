@@ -1,6 +1,7 @@
 export default {
   primary: '#D42026',
   secondary: '#D20A0A',
+  light: '#FFFFFF',
   buttonEnabled: '#D20A0A',
   buttonDisabled: '#D20A0A59',
   primaryFont: '#FFFFFF',

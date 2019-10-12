@@ -22,7 +22,6 @@ const Input = styled.input`
   border: 1px solid ${props => props.theme.primaryBorder};
   border-radius: 5px;
   height: 31px;
-  width: 100%;
   padding: 0 5px;
   outline: none;
 `

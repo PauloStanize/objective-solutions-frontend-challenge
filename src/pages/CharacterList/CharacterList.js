@@ -13,8 +13,8 @@ export default ({ fetch, pagination, filters }) => {
     <>
       <Header />
       <SearchInput />
-      <List />
-      <Pagination />
+      {/* <List /> */}
+      {/* <Pagination /> */}
     </>
   )
 }

@@ -24,8 +24,14 @@ const SearchInput = ({ className, setFilter, currentFilters }) => {
 }
 
 const StyledSearchInput = styled(SearchInput)`
-  width: 400px;
-  margin-bottom: 34px;
+  margin-bottom: 12px;
+  padding: 0 42px;
+
+  @media only screen and (min-width: 768px) {
+    padding: 0;
+    width: 400px;
+    margin-bottom: 34px;
+  }
 `
 
 export default StyledSearchInput
