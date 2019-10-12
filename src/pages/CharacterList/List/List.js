@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import LoadingDots from './../../../components/LoadingDots'
+import {
+  Link,
+} from "react-router-dom"
 
 const List = ({ characters, isPending }) => {
   return (
@@ -14,18 +17,20 @@ const List = ({ characters, isPending }) => {
         <LoadingDots />
       ) : (
           characters.map((character, key) => (
-            <ListRow key={key}>
-              <Character>
-                <CharacterAvatar src={(character.attributes.image || {}).original} alt="Avatar" />
-                <CharacterName>{character.attributes.name}</CharacterName>
-              </Character>
+            <Link to={`/details/${character.id}`} key={key} style={{ textDecoration: 'none' }} >
+              <ListRow>
+                <Character>
+                  <CharacterAvatar src={(character.attributes.image || {}).original} alt="Avatar" />
+                  <CharacterName>{character.attributes.name}</CharacterName>
+                </Character>
 
-              <Description>
-                <DescriptionText>
-                  {character.attributes.description}
-                </DescriptionText>
-              </Description>
-            </ListRow>
+                <Description>
+                  <DescriptionText>
+                    {character.attributes.description}
+                  </DescriptionText>
+                </Description>
+              </ListRow>
+            </Link>
           ))
         )
       }

@@ -1,11 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom"
 import CharacterList from '../pages/CharacterList'
+import CharacterDetails from '../pages/CharacterDetails'
 
 const App = () => (
   <>
     <Container>
-      <CharacterList />
+      <Router>
+        <Switch>
+          <Route path="/details/:id">
+            <CharacterDetails />
+          </Route>
+          <Route path="/">
+            <CharacterList />
+          </Route>
+        </Switch>
+      </Router>
     </Container>
     <Footer />
   </>
