@@ -100,9 +100,9 @@ const PageButton = styled(ResetedStyleButton)`
   border-radius: 32px;
   font-size: 21px;
   line-height: 1.1em;
-  color: ${props => props.isActive ? 'white' : '#D42026'};
-  background-color: ${props => props.isActive ? '#D42026' : 'white'};
-  border: 1px solid #D20A0A;
+  color: ${props => props.isActive ? 'white' : props.theme.primary};
+  background-color: ${props => props.isActive ? props.theme.primary : 'white'};
+  border: 1px solid ${props => props.theme.primary};
   margin: 0 10px;
 `
 
@@ -112,7 +112,7 @@ const PreviousButton = styled(ResetedStyleButton)`
   height: 0;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-right: 12px solid ${props => props.disabled ? '#d20a0a59' : '#D42026'};
+  border-right: 12px solid ${props => props.disabled ? props.theme.buttonDisabled : props.theme.buttonEnabled};
   margin-right: 2px;
 `
 
@@ -122,7 +122,7 @@ const NextButton = styled(ResetedStyleButton)`
   height: 0;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-left: 12px solid ${props => props.disabled ? '#d20a0a59' : '#D42026'};
+  border-left: 12px solid ${props => props.disabled ? props.theme.buttonDisabled : props.theme.buttonEnabled};
   margin-left: 2px;
 `
 

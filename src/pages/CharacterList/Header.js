@@ -16,17 +16,17 @@ const CandidateName = styled.div`
 const StyledHeader = styled(Header)`
   display: inline-flex;
   background: white;
-  color: #D42026;
+  color: ${props => props.theme.primary};
   width: 100%;
   font-size: 27px;
-  line-height: 32px;
+  line-height: 1.2em;
   font-family: "Roboto", Times, serif;
   font-weight: 100;
   margin-bottom: 34px;
 
   &:after {
     content: "";
-    background: #D42026;
+    background: ${props => props.theme.primary};
     position: absolute;
     top: 50px;
     left: 43px;

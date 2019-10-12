@@ -40,10 +40,10 @@ const GridRow = styled.div`
 `
 
 const ListRow = styled(GridRow)`
-  border-bottom: 2px solid #d4cece;
+  border-bottom: 2px solid ${props => props.theme.secondaryBorder};
   min-height: 115px;
   &:hover {
-    background: #ece5e5;
+    background: ${props => props.theme.primaryHighlight};
     cursor: pointer;
   }
 `
@@ -53,11 +53,11 @@ const Header = styled.div`
   align-items: center;
   padding: 0 10px;
   height: 37px;
-  background: #D42026;
-  color: #FFFFFF;
+  background: ${props => props.theme.primary};
+  color: ${props => props.theme.primaryFont};
   font-size: 16px;
   font-family: "Roboto", Times, serif;
-  line-height: 19px;
+  line-height: 1.2em;
 `
 
 const Character = styled.div`
@@ -75,14 +75,14 @@ const CharacterAvatar = styled.img`
 `
 
 const CharacterName = styled.div`
-  color: #4E4E4E;
+  color: ${props => props.theme.secondaryFont};
   font-size: 21px;
   line-height: 24px;
 `
 
 const Description = styled.div`
   padding: 20px 10px;
-  color: #4E4E4E;
+  color: ${props => props.theme.secondaryFont};
   font-size: 21px;
   line-height: 1.2em;
 `

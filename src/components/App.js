@@ -18,7 +18,7 @@ const Container = styled.div`
 
 const Footer = styled.div`
   width: 100%;
-  background: #D20A0A;
+  background: ${props => props.theme.secondary};
   height: 12px;
 `
 
