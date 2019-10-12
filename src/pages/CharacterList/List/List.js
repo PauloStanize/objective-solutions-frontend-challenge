@@ -1,17 +1,23 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import useWindowSize from '../../../utils/useWindowSize'
 import LoadingDots from './../../../components/LoadingDots'
 import {
   Link,
 } from "react-router-dom"
 
 const List = ({ characters, isPending }) => {
+  const { width: windowWidth } = useWindowSize()
+  const shouldRenderForScreenSize = windowWidth >= 768
+
   return (
     <>
-      <GridRow>
-        <Header>Personagem</Header>
-        <Header>Descrição</Header>
-      </GridRow>
+      <HeaderRow>
+        <HeaderElement>Personagem</HeaderElement>
+        {shouldRenderForScreenSize && (
+          <HeaderElement>Descrição</HeaderElement>
+        )}
+      </HeaderRow>
 
       {isPending ? (
         <LoadingDots />
@@ -24,11 +30,13 @@ const List = ({ characters, isPending }) => {
                   <CharacterName>{character.attributes.name}</CharacterName>
                 </Character>
 
-                <Description>
-                  <DescriptionText>
-                    {character.attributes.description}
-                  </DescriptionText>
-                </Description>
+                {shouldRenderForScreenSize && (
+                  <Description>
+                    <DescriptionText>
+                      {character.attributes.description}
+                    </DescriptionText>
+                  </Description>
+                )}
               </ListRow>
             </Link>
           ))
@@ -40,8 +48,12 @@ const List = ({ characters, isPending }) => {
 
 const GridRow = styled.div`
   display: grid;
-  grid-template-columns: minmax(200px, 1fr) minmax(400px, 3fr);
   grid-column-gap: 10px;
+  grid-template-columns: 1fr;
+
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 1fr 2fr;
+  }
 `
 
 const ListRow = styled(GridRow)`
@@ -53,16 +65,21 @@ const ListRow = styled(GridRow)`
   }
 `
 
-const Header = styled.div`
-  display: grid;
+const HeaderRow = styled(GridRow)`
   align-items: center;
-  padding: 0 10px;
   height: 37px;
-  background: ${props => props.theme.primary};
   color: ${props => props.theme.primaryFont};
   font-size: 16px;
   font-family: "Roboto", Times, serif;
   line-height: 1.2em;
+`
+
+const HeaderElement = styled.div`
+  display: grid;
+  padding: 0 10px;
+  height: 37px;
+  background: ${props => props.theme.primary};
+  align-items: center;
 `
 
 const Character = styled.div`
